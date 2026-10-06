@@ -1,3 +1,8 @@
-a.out
+*.out
 practice7.3
 .vscode/
+
+practice13/build/
+*.gcda
+*.gcno
+*.gcov
