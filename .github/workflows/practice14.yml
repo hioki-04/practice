@@ -1,0 +1,38 @@
+name: Practice14 CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y cmake g++ libgtest-dev gcovr
+
+      - name: Configure
+        run: cmake -S practice14 -B practice14/build
+
+      - name: Build
+        run: cmake --build practice14/build
+
+      - name: Run unit test
+        run: ./practice14/build/practice14_test
+
+      - name: Run coverage
+        run: |
+          cd practice14/build/CMakeFiles/practice14_test.dir
+          gcov practice14.c.gcda
+
+      - name: Coverage result
+        run: |
+          cd practice14/build/CMakeFiles/practice14_test.dir
+          cat practice14.c.gcov
