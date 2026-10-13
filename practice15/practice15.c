@@ -16,15 +16,14 @@ void SortName(struct student n[], int student_count){
         for(int count = number + 1; count < student_count; count++){
             struct student temp;          
             int strcmp_res = strcmp(n[number].name, n[count].name);
-            if(strcmp_res < 0){
-                    //負の値の時、第一引数の方が前
-                }else if(strcmp_res > 0){
-                    //正の値の時、第二引数の方が前 入れ替え
-                    temp = n[number];
-                    n[number] = n[count];
-                    n[count] = temp;
-                }
+
+            if(strcmp_res > 0){
+                temp = n[number];
+                n[number] = n[count];
+                n[count] = temp;
+            }
         }
+
         printf("%s:%d\n",n[number].name,n[number].point);
     } 
 }
@@ -42,14 +41,13 @@ void SortPoint(struct student n[], int student_count){
             
             }else if (n[number].point == n[count].point){
                 int strcmp_res = strcmp(n[number].name, n[count].name);
-                if(strcmp_res < 0){
-                    //負の値の時、第一引数の方が前
-                }else if(strcmp_res > 0){
-                    //正の値の時、第二引数の方が前 入れ替え
+
+                if(strcmp_res > 0){
                     temp = n[number];
                     n[number] = n[count];
                     n[count] = temp;
-            }
+                }
+
             // 入れ替え
             }else if (n[number].point < n[count].point){
                 temp = n[number];
@@ -57,6 +55,7 @@ void SortPoint(struct student n[], int student_count){
                 n[count] = temp;
             }
         }
+
         printf("%s:%d\n",n[number].name,n[number].point);
     } 
 }
