@@ -7,18 +7,18 @@ struct student
     int point;
 };
 
-void SortName(struct student n[]){
+void SortName(struct student n[], int student_count){
 
     printf("■名前順■\n");
     printf("名前:点数\n");
 
-    for(int number = 0; number < 6; number++){
-        for(int count = number + 1; count < 6; count++){
-            struct student temp;
-    
-            if(strcmp(n[number].name, n[count].name) < 0){
+    for(int number = 0; number < student_count; number++){
+        for(int count = number + 1; count < student_count; count++){
+            struct student temp;          
+            int strcmp_res = strcmp(n[number].name, n[count].name);
+            if(strcmp_res < 0){
                     //負の値の時、第一引数の方が前
-                }else if(strcmp(n[number].name, n[count].name) > 0){
+                }else if(strcmp_res > 0){
                     //正の値の時、第二引数の方が前 入れ替え
                     temp = n[number];
                     n[number] = n[count];
@@ -29,21 +29,22 @@ void SortName(struct student n[]){
     } 
 }
 
-void SortPoint(struct student n[]){
+void SortPoint(struct student n[], int student_count){
 
     printf("■成績順■\n");
     printf("名前:点数\n");
 
-    for(int number = 0; number < 6; number++){
-        for(int count = number + 1; count < 6; count++){
+    for(int number = 0; number < student_count; number++){
+        for(int count = number + 1; count < student_count; count++){
             struct student temp;
     
             if(n[number].point > n[count].point){
             
             }else if (n[number].point == n[count].point){
-                if(strcmp(n[number].name, n[count].name) < 0){
+                int strcmp_res = strcmp(n[number].name, n[count].name);
+                if(strcmp_res < 0){
                     //負の値の時、第一引数の方が前
-                }else if(strcmp(n[number].name, n[count].name) > 0){
+                }else if(strcmp_res > 0){
                     //正の値の時、第二引数の方が前 入れ替え
                     temp = n[number];
                     n[number] = n[count];
@@ -62,28 +63,19 @@ void SortPoint(struct student n[]){
 
 int main(void)
 {
-    struct student test[6];
-    
-    test[0].name = "sara";
-    test[0].point = 88;
+    struct student test[] = {
+        {"sara", 88},
+        {"gintonic", 12},
+        {"aida", 44},
+        {"yankoro", 35},
+        {"kumazaki", 44},
+        {"onizuka", 93}
+    };
 
-    test[1].name = "gintonic";
-    test[1].point = 12;
+    int student_count = sizeof(test) / sizeof(test[0]);
 
-    test[2].name = "aida";
-    test[2].point = 44;
+    SortName(test, student_count);
 
-    test[3].name = "yankoro";
-    test[3].point = 35;
-
-    test[4].name = "kumazaki";
-    test[4].point = 44;
-
-    test[5].name = "onizuka";
-    test[5].point = 93;
-
-    SortName(test);
-
-    SortPoint(test);
+    SortPoint(test, student_count);
 
 }
